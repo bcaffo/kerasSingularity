@@ -3,6 +3,11 @@ From: centos:centos6.9
 
 
 %post
+        ## This is some weird glitch where there's a bug in centos 6
+        ## where it's not loading /etc/sysconfig/i18n file correctly
+        ## my kludgy fix is to set the lang environment for everyone
+        echo "export LANG=en_US.UTF-8" >> /etc/bashrc
+
         rpm -Uvh https://download.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
         yum update
         yum install R --nogpgcheck
