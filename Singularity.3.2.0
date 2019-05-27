@@ -25,4 +25,13 @@ From: centos:centos6.9
 
         ## install devtools
         R -e 'install.packages("devtools", dependencies=TRUE, repos="http://cran.rstudio.com/")'
+        R -e 'install.packages("tidyverse", dependencies = TRUE, repos="http://cran.rstudio.com/")'
+
+        ## installing keras
+        R -e 'devtools::install_github("rstudio/keras")'
+
+
+
+
+
 
