@@ -54,9 +54,9 @@ From: centos:centos6.9
 	## Install pip dependencies
 	#####################
 	## These are required for keras and tensorflow
-	sudo pip3 install virtualenv
-	sudo pip3 install tensorflow
-	sudo pip3 install keras
+	sudo pip3 -q install virtualenv
+	sudo pip3 -q install tensorflow
+	sudo pip3 -q install keras
 
 	## install R packages
 	#####################
