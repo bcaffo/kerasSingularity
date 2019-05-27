@@ -1,2 +1,10 @@
 Bootstrap: docker
 From: centos:centos6.9
+
+
+%post
+        rpm -Uvh https://download.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+        yum update
+        yum install R --nogpgcheck
+
+
