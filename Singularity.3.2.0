@@ -51,6 +51,7 @@ From: centos:centos6.9
 
 	## install R-devel
         yum -y --enablerepo=ius install R-devel
+	
 
 	yum -y update
 
