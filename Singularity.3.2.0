@@ -6,12 +6,6 @@ From: centos:centos6.9
         export LANG=en_US.UTF-8
         
 %post
-        ## This is some weird glitch where there's a bug in centos 6
-        ## where it's not loading /etc/sysconfig/i18n file correctly
-        ## my kludgy fix is to set the lang environment for everyone
-        echo "export LANG=en_US.UTF-8" >> /etc/bashrc
-
-
         ## This loads the community epel releases
         yum -y install epel-release
         curl 'https://setup.ius.io/' -o setup-ius.sh
@@ -20,6 +14,15 @@ From: centos:centos6.9
         ## installs pyton 3.6
         yum -y --enablerepo=ius install python36u
 
+        ## installs pip
+        yum -y --enablerepo=ius install python-pip
+
         ## install R-devel
         yum -y --enablerepo=ius install R-devel
+
+        ## install R-devel
+        yum -y --enablerepo=ius install R-devel
+
+        ## install devtools
+        R -e 'install.packages("devtools", dependencies=TRUE, repos="http://cran.rstudio.com/")'
 
