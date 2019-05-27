@@ -1,6 +1,10 @@
 Bootstrap: docker
 From: centos:centos6.9
 
+%environment
+        export LC_ALL=en_US.UTF-8
+        export LANG=en_US.UTF-8
+        
 %post
         ## This is some weird glitch where there's a bug in centos 6
         ## where it's not loading /etc/sysconfig/i18n file correctly
