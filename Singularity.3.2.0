@@ -6,15 +6,14 @@ From: centos:centos6.9
         export LANG=en_US.UTF-8
         
 %post
-        ## I'm throwing in updates after everything
-        ## for debugging
 	yum -y -q update
 
-	## I think some of the R install errors were from R
-        ## not being run as root
+	## Install sudo
+	#####################	
 	yum -y -q install sudo
 	
 	## This loads the community epel releases
+	#####################
 	yum -y -q install epel-release
 	curl 'https://setup.ius.io/' -o setup-ius.sh
 	sh setup-ius.sh
@@ -23,20 +22,21 @@ From: centos:centos6.9
 	yum -y -q update
 	
 	## These are the RHL / centos / fedora development tools library
+	#####################
 	yum -y -q groupinstall "Development Tools"
 
-	yum -y -q update
-
 	## installs pyton 3.6
+	#####################
 	yum -y -q --enablerepo=ius install python36u-devel
 
-	yum -y -q update
-
 	## installs pip for python 3.6
+	#####################
 	curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
 	sudo python3.6 get-pip.py
 	rm get-pip.py
 	
+	## Install library dependencies
+	#####################	
 	## these are all required by devtools
 	yum install -y -q libxml2-devel
         yum install -y -q libcurl-devel
@@ -47,23 +47,30 @@ From: centos:centos6.9
 	yum install -y -q libpng-devel
         yum install -y -q libjpeg-turbo-devel
 
-	yum -y update
-
 	## install R-devel
+	#####################	
         yum -y -q --enablerepo=ius install R-devel
 	
-	yum -y -q update
-
+	## Install pip dependencies
+	#####################
 	## These are required for keras and tensorflow
 	sudo pip3 install virtualenv
 	sudo pip3 install tensorflow
 	sudo pip3 install keras
 
 	## install R packages
-	sudo R -e 'install.packages("devtools",  dependencies = TRUE, repos="http://cran.rstudio.com/")'
-	sudo R -e 'install.packages("tidyverse", dependencies = TRUE, repos="http://cran.rstudio.com/")'
+	#####################
+	## This isn't good. It's the only way I could supress an annoying warning
+	## just makes the missing documentation directory
+	sudo mkdir /usr/share/doc/R-3.5.2/html
+	
+	## Install some core R packages
+	sudo R -e 'install.packages("devtools", repos="http://cran.rstudio.com/", quiet = TRUE)'
+	sudo R -e 'install.packages("tidyverse",repos="http://cran.rstudio.com/", quiet = TRUE)'
 
 	## installing R keras
-	## sudo R -e 'devtools::install_github("rstudio/keras")'
+	#####################
+	sudo R -e 'devtools::install_github("rstudio/keras", quiet = TRUE, args = "--no-html", build_vignettes = FALSE)'
+	## This doesn't work
 	## sudo R -e 'keras::install_keras()'
 	
