@@ -1,0 +1,2 @@
+Bootstrap: docker
+From: centos:centos6.9
