@@ -6,32 +6,62 @@ From: centos:centos6.9
         export LANG=en_US.UTF-8
         
 %post
-        ## This loads the community epel releases
-        yum -y install epel-release
-        curl 'https://setup.ius.io/' -o setup-ius.sh
-        sh setup-ius.sh
+        ## I'm throwing in updates after everything
+        ## for debugging
+	yum -y update
+        ## I think some of the R install errors were from R
+        ## not being run as root
+	yum -y install sudo
+	
+	## This loads the community epel releases
+	yum -y install epel-release
+	curl 'https://setup.ius.io/' -o setup-ius.sh
+	sh setup-ius.sh
 
-        ## installs pyton 3.6
-        yum -y --enablerepo=ius install python36u
+	yum -y update
+	
+	## These are the RHL / centos / fedora development tools library
+	yum -y groupinstall "Development Tools"
 
-        ## installs pip
-        yum -y --enablerepo=ius install python-pip
+	yum -y update
 
-        ## install R-devel
+	## installs pyton 3.6
+	yum -y --enablerepo=ius install python36u
+
+	yum -y update
+
+	## installs pip for python 3.6
+	curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
+	sudo python3.6 get-pip.py
+	rm get-pip.py
+
+	## these are all required by devtools
+	yum install -y libxml2-devel
+        yum install -y libcurl-devel
+        yum install -y openssl-devel
+        yum install -y libssh2-devel
+
+	## required for the image packages
+	yum install -y libpng-devel
+        yum install -y libjpeg-turbo-devel
+
+	yum -y update
+
+	## install R-devel
         yum -y --enablerepo=ius install R-devel
 
-        ## install R-devel
-        yum -y --enablerepo=ius install R-devel
+	yum -y update
 
-        ## install devtools
-        R -e 'install.packages("devtools", dependencies=TRUE, repos="http://cran.rstudio.com/")'
-        R -e 'install.packages("tidyverse", dependencies = TRUE, repos="http://cran.rstudio.com/")'
+	## These are required for keras and tensorflow
+	sudo pip install virtualenv
+	sudo pip install tensorflow
+	sudo pip install keras
 
-        ## installing keras
-        R -e 'devtools::install_github("rstudio/keras")'
+	## install R packages
+	## sudo R -e 'install.packages("devtools",  dependencies = TRUE, repos="http://cran.rstudio.com/")'
+	## sudo R -e 'install.packages("tidyverse", dependencies = TRUE, repos="http://cran.rstudio.com/")'
 
-
-
-
-
-
+	## installing R keras
+	## sudo R -e 'devtools::install_github("rstudio/keras")'
+	## sudo R -e 'keras::install_keras()'
+	
