@@ -9,7 +9,8 @@ From: centos:centos6.9
         ## I'm throwing in updates after everything
         ## for debugging
 	yum -y update
-        ## I think some of the R install errors were from R
+
+	## I think some of the R install errors were from R
         ## not being run as root
 	yum -y install sudo
 	
@@ -17,7 +18,8 @@ From: centos:centos6.9
 	yum -y install epel-release
 	curl 'https://setup.ius.io/' -o setup-ius.sh
 	sh setup-ius.sh
-
+	rm setup-ius.sh
+	
 	yum -y update
 	
 	## These are the RHL / centos / fedora development tools library
