@@ -28,7 +28,7 @@ From: centos:centos6.9
 	yum -y update
 
 	## installs pyton 3.6
-	yum -y --enablerepo=ius install python36u
+	yum -y --enablerepo=ius install python36u-devel
 
 	yum -y update
 
@@ -36,7 +36,7 @@ From: centos:centos6.9
 	curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
 	sudo python3.6 get-pip.py
 	rm get-pip.py
-
+	
 	## these are all required by devtools
 	yum install -y libxml2-devel
         yum install -y libcurl-devel
@@ -52,17 +52,16 @@ From: centos:centos6.9
 	## install R-devel
         yum -y --enablerepo=ius install R-devel
 	
-
 	yum -y update
 
 	## These are required for keras and tensorflow
-	sudo pip install virtualenv
-	sudo pip install tensorflow
-	sudo pip install keras
+	sudo pip3 install virtualenv
+	sudo pip3 install tensorflow
+	sudo pip3 install keras
 
 	## install R packages
-	## sudo R -e 'install.packages("devtools",  dependencies = TRUE, repos="http://cran.rstudio.com/")'
-	## sudo R -e 'install.packages("tidyverse", dependencies = TRUE, repos="http://cran.rstudio.com/")'
+	sudo R -e 'install.packages("devtools",  dependencies = TRUE, repos="http://cran.rstudio.com/")'
+	sudo R -e 'install.packages("tidyverse", dependencies = TRUE, repos="http://cran.rstudio.com/")'
 
 	## installing R keras
 	## sudo R -e 'devtools::install_github("rstudio/keras")'
