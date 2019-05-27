@@ -2,6 +2,9 @@ Bootstrap: docker
 From: centos:centos6.9
 
 %environment
+	## These are necessary since if they aren't included 
+	## locale returns the wrong encoding
+	## this seems to fix it
         export LC_ALL=en_US.UTF-8
         export LANG=en_US.UTF-8
         
@@ -69,7 +72,6 @@ From: centos:centos6.9
 	sudo R -e 'install.packages("tidyverse",repos="http://cran.rstudio.com/", quiet = TRUE)'
 
 	## installing R keras
-	#####################
 	sudo R -e 'devtools::install_github("rstudio/keras", quiet = TRUE, args = "--no-html", build_vignettes = FALSE)'
 	## This doesn't work
 	## sudo R -e 'keras::install_keras()'
