@@ -8,3 +8,8 @@ The Centos version doesn't seem to work. The ubuntu version basically uses code 
 singularity pull shub://bcaffo/kerasSingularity:ubuntu16
 ```
 
+Example useage
+```
+singularity shell -H $HOME:/home/$USER <image file>
+```
+where here setting the user home is necessary since on the host I'm working with the user home is in a different locale than on the guest OS.
