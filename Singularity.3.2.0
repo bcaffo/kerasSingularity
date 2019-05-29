@@ -71,8 +71,12 @@ From: centos:centos6.9
 	sudo R -e 'install.packages("devtools", repos="http://cran.rstudio.com/", quiet = TRUE)'
 	sudo R -e 'install.packages("tidyverse",repos="http://cran.rstudio.com/", quiet = TRUE)'
 
+	## These seem to be needed
+	yum -y -q update
+	yum -y -q install -y libpython-dev
+  	yum -y -q install -y libpython3-dev
+	
 	## installing R keras
 	sudo R -e 'devtools::install_github("rstudio/keras", quiet = TRUE, args = "--no-html", build_vignettes = FALSE)'
-	## This doesn't work
 	## sudo R -e 'keras::install_keras()'
 	
