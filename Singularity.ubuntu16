@@ -124,7 +124,7 @@ From: ubuntu:16.04
   sudo R -q -e 'devtools::install_github("rstudio/keras")'
   
   ## Set it so that R loads the correct python
-  echo '.First <- function(){cat("Setting reticulate python\n"); reticulate::use_python(system("which python3", intern = TRUE))}' >> /etc/R/Rprofile.site
+  echo '.First = function(){cat("Setting reticulate python\n"); reticulate::use_python(system("which python3", intern = TRUE))}' >> /etc/R/Rprofile.site
   
   ## Been using the direct install method above
   ## use reticulate::use_python(system("which python3", intern = TRUE))
