@@ -98,24 +98,19 @@ From: ubuntu:16.04
         caTools \
         BiocManager
 
-  ## this installs the relevant python libs
+  ## this installs relevant python libs (+curl)
   sudo apt-get -qq install curl
-
-  ## Trying to get things to work. I think
-  ## that these are missing dependencies
-  apt-get -qq update
-  apt-get -qq install -y libpython-dev
-  apt-get -qq install -y libpython3-dev
+  sudo apt-get -qq update
+  sudo apt-get -qq install -y libpython-dev
+  sudo apt-get -qq install -y libpython3-dev
 
   ## get pip and install the TF libraries
   curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
 	sudo python3 get-pip.py
   rm get-pip.py
  
- 
   ##Install keras, tensforflow
-  ##virtualenv is necessary if you use
-  ##install_keras in R
+  ##virtualenv is necessary if you use install_keras in R
   sudo pip3 -q install virtualenv
 	sudo pip3 -q install tensorflow
 	sudo pip3 -q install keras
@@ -125,11 +120,5 @@ From: ubuntu:16.04
   
   ## Set it so that R loads the correct python
   echo '.First = function(){cat("Setting reticulate python\n"); reticulate::use_python(system("which python3", intern = TRUE))}' >> /etc/R/Rprofile.site
-  
-  ## Been using the direct install method above
-  ## use reticulate::use_python(system("which python3", intern = TRUE))
-  ## to use python3
-  ##sudo R -q -e 'reticulate::use_python(system("which python3", intern = TRUE)); keras::install_keras()'
-  ##sudo R -q -e 'keras::install_keras()'
-  
+    
   
