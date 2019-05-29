@@ -22,11 +22,7 @@ model %>%
   layer_dropout(rate = 0.4) %>% 
   layer_dense(units = 128, activation = 'relu') %>%
   layer_dropout(rate = 0.3) %>%
-  layer_dense(units = 10, activation = 'softmax')model %>% compile(
-      loss = 'categorical_crossentropy',
-      optimizer = optimizer <- rmsprop(),
-      metrics = c('accuracy')
-    )
+  layer_dense(units = 10, activation = 'softmax')
 
 model %>% compile(
   loss = 'categorical_crossentropy',
