@@ -74,9 +74,8 @@ From: centos:centos6.9
 	## These seem to be needed
 	yum -y -q update
 	yum -y -q install -y libpython-dev
-  	yum -y -q install -y libpython3-dev
+  	#yum -y -q install -y libpython3-dev
 	
 	## installing R keras
 	sudo R -e 'devtools::install_github("rstudio/keras", quiet = TRUE, args = "--no-html", build_vignettes = FALSE)'
-	## sudo R -e 'keras::install_keras()'
 	
