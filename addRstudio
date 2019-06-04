@@ -19,7 +19,7 @@ from: bcaffo/kerasSingularity:ubuntu16
       wget \
       libclang-dev \
       libclang-3.8-dev \
-      libobjc-6-dev \
+      libobjc-5-dev \
       libclang1-3.8 \
       libclang-common-3.8-dev \
       libllvm3.8 \
